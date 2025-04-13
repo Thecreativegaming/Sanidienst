@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Schulsanitätsdienst Dienstplan</title>
+    <style>
+      :root {
+        --bg: #f6f8fa;
+        --text: #24292f;
+        --muted: #57606a;
+        --card-bg: #ffffff;
+        --border: #d0d7de;
+        --blue: #0969da;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        padding: 2rem 1rem 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      main {
+        flex: 1;
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .card-view {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .day-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04);
+      }
+
+      .day-card h3 {
+        margin: 0 0 1rem;
+        font-size: 1.1rem;
+        color: var(--blue);
+        font-weight: 600;
+      }
+
+      .sani-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .sani-row span:first-child {
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .sani-row span:last-child {
+        color: var(--muted);
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+        padding: 2rem 1rem 1rem;
+      }
+
+      @media (max-width: 500px) {
+        .sani-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Schulsanitätsdienst Dienstplan</h1>
+      <p>Zuletzt aktualisiert: <span id="lastUpdated"></span></p>
+      <p>Nächste Aktualisierung: <span id="nextUpdate"></span></p>
+    </header>
+
+    <main>
+      <div class="card-view">
+        <div class="day-card">
+          <h3>Montag</h3>
+          <div class="sani-row">
+            <span>Sanitäter A:</span> <span>Lilli</span>
+          </div>
+          <div class="sani-row">
+            <span>Sanitäter B:</span> <span>Kenzo</span>
+          </div>
+        </div>
+        <div class="day-card">
+          <h3>Dienstag</h3>
+          <div class="sani-row">
+            <span>Sanitäter A:</span> <span>Emil</span>
+          </div>
+          <div class="sani-row">
+            <span>Sanitäter B:</span> <span>Phillip</span>
+          </div>
+        </div>
+        <div class="day-card">
+          <h3>Mittwoch</h3>
+          <div class="sani-row">
+            <span>Sanitäter A:</span> <span>Fabian</span>
+          </div>
+          <div class="sani-row">
+            <span>Sanitäter B:</span> <span>Marlene</span>
+          </div>
+        </div>
+        <div class="day-card">
+          <h3>Donnerstag</h3>
+          <div class="sani-row">
+            <span>Sanitäter A:</span> <span>Lilli</span>
+          </div>
+          <div class="sani-row">
+            <span>Sanitäter B:</span> <span>Luca</span>
+          </div>
+        </div>
+        <div class="day-card">
+          <h3>Freitag</h3>
+          <div class="sani-row">
+            <span>Sanitäter A:</span> <span>Emil</span>
+          </div>
+          <div class="sani-row">
+            <span>Sanitäter B:</span> <span>Luciano</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Diese Website ist ausschließlich für den privaten / schulischen Gebrauch.
+      &copy; <span id="year"></span>
+    </footer>
+
+    <script>
+      const date = new Date();
+      document.getElementById("lastUpdated").textContent =
+        date.toLocaleDateString("de-DE");
+
+      document.getElementById("nextUpdate").textContent =
+        nextDate(0).toLocaleDateString();
+      document.getElementById("year").textContent = date.getFullYear();
+
+      function nextDate(dayIndex) {
+        var today = new Date();
+        today.setDate(
+          today.getDate() + ((dayIndex - 1 - today.getDay() + 7) % 7) + 1
+        );
+        return today;
+      }
+    </script>
+  </body>
+</html>
